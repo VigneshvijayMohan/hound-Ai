@@ -2,9 +2,13 @@ from openai import OpenAI
 import os
 
 
-client = OpenAI(api_key="")  
+# client = OpenAI(api_key="")  
+client = OpenAI(
+    base_url="https://models.inference.ai.azure.com",
+    api_key=os.environ["GITHUB_TOKEN"],
+)
 
-def get_completion(prompt, model="gpt-3.5-turbo"):
+def get_completion(prompt, model="gpt-4o"):
     messages = [{"role": "user", "content": prompt}]
     response = client.chat.completions.create(
         model=model,
